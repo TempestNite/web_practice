@@ -1,29 +1,60 @@
 <!DOCTYPE html>
 <html>
-<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-<link rel="stylesheet" href="/static/generic_full.css">
-<script src="https://www.w3schools.com/lib/w3.js"></script>
-<!--<link rel="stylesheet" media="(min-width: 760px)" href="/static/generic.css">-->
-
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <head>
     <meta charset="UTF-8">
-
-    <h1>ok</h1>
+    {% extends "header.html" %}
+    {% block head %}
+    {{ super() }}
+    {% endblock %}
 </head>
-<body>
-<div w3-include-html="/header.html"></div>
-<script>
-    w3.includeHTML();
-</script>
 
+<body>
+    {% block content %}
+    <div class="container-fluid">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+         {% if messages %}
+            <ul>
+               {% for category, message in messages %}
+               <li class="{{ category }}">{{ message }}</li>
+               {% endfor %}
+            </ul>
+         {% endif %}
+        {% endwith %}
+        <div class="row"><div class="col-md-12 buffer"></div></div>
+            <form class="form-horizontal" action="." method="POST">
+
+                <div class="form-group">
+                    <label class="control-label col-sm-1 col-sm-offset-4" for="username">Username:</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" id="username" name="uname">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-1 col-sm-offset-4" for="pwd">Password:</label>
+                    <div class="col-sm-2">
+                        <input type="password" class="form-control" id="pwd" name="passwd">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-5 col-xl-offset-5 col-sm-offset-5 col-sm-3">
+                        {{ recaptcha }}
+                        <button type="submit"
+                                class="btn btn-default"
+                                name="submit"
+                                value="Register">Register</button>
+
+                        <button type="submit"
+                                class="btn btn-default"
+                                name="submit"
+                                value="Login">Login</button>
+                    </div>
+                </div>
+            </form>
+        <!--<img src="/static/wood_header.jpg">-->
+    </div>
+    {% endblock %}
 </body>
 </html>

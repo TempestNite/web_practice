@@ -1,12 +1,13 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_bcrypt import Bcrypt
+from flask_recaptcha import ReCaptcha
 from User import User
 import db
 
 from nocache import nocache
 
 app = Flask(__name__)
-bcrypt = Bcrypt(app)
+recaptcha = ReCaptcha(app=app)
 error = None
 
 @app.route('/')
@@ -19,6 +20,10 @@ def hello_world():
 def login_page():
     return render_template('login.html')
 
+@app.route('/about')
+def about_page():
+    return render_template('about.html')
+
 @app.route('/', methods=['POST', 'GET'])
 def login():
 
@@ -27,19 +32,25 @@ def login():
     error = 'Invalid username or password. Please try again!'
 
     if txt_uname == "" or txt_passwd == "":
-        flash("Require username and password")
+        flash("Require username and password", 'error')
+        return render_template('login.html', error=error)
 
     if request.form['submit'] == "Login":
 
         uquery = db.query_db("SELECT * from Users WHERE Username = ?", [txt_uname], one=True)
 
+        if recaptcha.verify():
+            pass
+        else:
+            flash("Recaptcha failed", "error")
+            return render_template('login.html', error=error)
+
         if uquery is None:
             print ('No such user')
-            return render_template('home.html', error=error)
-            flash("TRASH")
+            # flash("TRASH")
+            return render_template('login.html', error=error)
         else:
             print ("User exists")
-            return redirect(url_for('hello_world'))
 
         # uquery[1] is username; [2] is pw from uquery
 
@@ -47,10 +58,11 @@ def login():
 
         # CHANGE THIS LATER
         # cpuser.pw_hash = user.set_password("resolve")
+        user = User(txt_uname, txt_passwd)
 
         print (user.pw_hash)
         print ("Input hash:")
-        print (cpuser.pw_hash)
+        # print (cpuser.pw_hash)
         print ("\n")
 
         user.check_password (txt_passwd)
@@ -60,7 +72,7 @@ def login():
 
         if user.check_password(txt_passwd) == True:
             print ('YES')
-            return redirect(url_for('login', user=user))
+            return redirect(url_for('login_page', user=user))
 
         else:
             print ('NO')
@@ -78,7 +90,7 @@ def login():
 
         else:
             print("This user already exists")
-            return redirect(url_for('hello_world'))
+            return redirect(url_for('login_page'))
 
 
 

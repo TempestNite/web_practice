@@ -22,6 +22,20 @@ a:hover .theme-fade
     -o-transition: color 0.5s ease;
 }
 
+.error
+{
+    color: red;
+}
+
+.dropdown-toggle:active, .open .dropdown-toggle
+{
+    background: #e6c39c !important;
+}
+
+.dropdown-toggle[aria-expanded="true"]
+{
+  background:#e6c39c !important;
+}
 
 .header
 {
@@ -53,12 +67,6 @@ a:hover .theme-fade
 body
 {
     margin: 0;
-}
-
-p
-{
-    margin: 0;
-    border-style: solid;
 }
 
 .buffer
