@@ -2,11 +2,16 @@
 <html lang="en" xmlns:Password="http://www.w3.org/1999/xhtml" xmlns:Username="http://www.w3.org/1999/xhtml">
 
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
 <link rel="stylesheet" href="/static/generic_full.css">
 <!--<link rel="stylesheet" media="(min-width: 760px)" href="/static/generic.css">-->
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"
+      rel="stylesheet"
+      type="text/css">
 
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -26,7 +31,7 @@
     {% block head %}
     <title>Tempest</title>
 
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default" id="navbar-flush">
     <div class="container-fluid header-color">
         <div class="navbar-header">
             <a class="navbar-brand" href="/">
@@ -44,8 +49,7 @@
                    data-toggle="dropdown"
                    role="button"
                    aria-haspopup="true"
-                   aria-expanded="false">
-                    <span class="theme-color">Dropdown</span>
+                   aria-expanded="false"><span class="theme-color">Dropdown</span>
                 </a>
                 <ul class="dropdown-menu">
                     <li><a href="/login">Action</a></li>

@@ -22,11 +22,41 @@ a:hover .theme-fade
     -o-transition: color 0.5s ease;
 }
 
+.jumbotron
+{
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+#jumbo-box
+{
+    height: 600px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-bottom: 15px;
+    padding: 80px;
+}
+
+.white-bg
+{
+    background: white !important;
+}
+
+#navbar-flush
+{
+    margin-bottom: 15px;
+}
+
+li
+{
+    font-size:105%;
+}
+
 .error
 {
     color: red;
 }
 
+/* navbar toggle dropdown */
 .dropdown-toggle:active, .open .dropdown-toggle
 {
     background: #e6c39c !important;
@@ -61,7 +91,7 @@ a:hover .theme-fade
 
 .header-color
 {
-    background-color: navajowhite;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 body
