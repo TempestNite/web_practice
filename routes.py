@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
-from flask_bcrypt import Bcrypt
 from flask_recaptcha import ReCaptcha
 from User import User
 import db
