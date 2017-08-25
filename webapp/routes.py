@@ -1,12 +1,12 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
-from flask_recaptcha import ReCaptcha
-from User import User
 import db
-
-from nocache import nocache
-
-app = Flask(__name__)
+from User import User
+from flask import render_template, request, redirect, url_for, flash
+from webapp import app
+from flask_recaptcha import ReCaptcha
 recaptcha = ReCaptcha(app=app)
+
+from webapp.nocache import nocache
+
 error = None
 
 @app.route('/')
@@ -90,9 +90,3 @@ def login():
         else:
             print("This user already exists")
             return redirect(url_for('login_page'))
-
-
-
-if __name__ == '__main__':
-    app.secret_key = 'super secret key'
-    app.run(debug=True)
